@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swara Box - All Content</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li class="brand"><img src="swara box.jpg" alt="Swara Box Logo"> Swara Box</li>
+            <li><a href="intro.html">Home</a></li>
+            <li><a href="musiconly.html">Music</a></li>
+            <li><a href="podcastonly.html">Podcasts</a></li>
+            <li><a href="privacy-policy.html">About</a></li>
+            <li><a href="#" onclick="logout()">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="songList">
+            <h1>All Contents</h1>
+            <div class="upload-container">
+                <h3>Upload Content</h3>
+                <input type="text" id="songTitle" placeholder="Title" required>
+                <input type="text" id="songArtist" placeholder="Artist" required>
+                <label>Cover Image:</label>
+                <input type="file" name="coverFile" accept="image/*" />
+                <select id="isPodcast">
+                    <option value="false">Music</option>
+                    <option value="true">Podcast</option>
+                </select>
+                <select id="songType" required>
+                    <option value="" disabled selected>Select Type</option>
+                    <option value="retro">Retro</option>
+                    <option value="latest">Latest</option>
+                    <option value="classic">Classic</option>
+                </select>
+                <select id="songLanguage" required>
+                    <option value="" disabled selected>Select Language</option>
+                    <option value="Kannada">Kannada</option>
+                    <option value="Hindi">Hindi</option>
+                    <option value="English">English</option>
+                </select>
+                <input type="file" id="songFile" accept=".mp3" required>
+                <button onclick="uploadSong()">Upload</button>
+            </div>
+            <div class="filter-container">
+                <label for="typeFilter">Type:</label>
+                <select id="typeFilter">
+                    <option value="">All Types</option>
+                    <option value="retro">Retro</option>
+                    <option value="latest">Latest</option>
+                    <option value="classic">Classic</option>
+                </select>
+                <label for="languageFilter">Language:</label>
+                <select id="languageFilter">
+                    <option value="">All Languages</option>
+                    <option value="Kannada">Kannada</option>
+                    <option value="Hindi">Hindi</option>
+                    <option value="English">English</option>
+                </select>
+                <button onclick="fetchSongs()">Filter</button>
+            </div>
+            <div class="searchBar">
+                <input type="text" id="searchInput" placeholder="Search content...">
+            </div>
+            <div class="recommendation">
+                <h2>Your Recommendation</h2>
+                <button id="recommendButton">Get Another Recommendation</button>
+                <div id="recommendation"></div>
+            </div>
+
+            <div class="songItemContainer" id="songListContainer"></div>
+        </div>
+    </div>
+
+    <div class="bottom">
+        <input type="range" id="myProgressBar" min="0" value="0" max="100">
+        <div class="songInfo">
+            <img src="playing.gif" id="gif" style="opacity: 0; width: 40px;">
+            <span id="masterSongName">Select a Content</span>
+            <div class="icons">
+                <i class="fas fa-step-backward" id="previous"></i>
+                <i class="far fa-play-circle" id="masterPlay"></i>
+                <i class="fas fa-step-forward" id="next"></i>
+            </div>
+            <input type="range" id="volumeControl" min="0" max="100" value="50">
+        </div>
+    </div>
+    <script src="contentfile.js"></script>
+</body>
+</html>

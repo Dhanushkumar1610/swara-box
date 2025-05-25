@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swara Box - Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li class="brand"><img src="swara box.jpg" alt="Swara Box Logo"> Swara Box</li>
+            <li><a href="intro.html">Home</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="form-container">
+            <div id="loginForm">
+                <h3>Log In</h3>
+                <input type="email" id="loginEmail" placeholder="Email" required>
+                <input type="password" id="loginPassword" placeholder="Password" required>
+                <button onclick="login()">Log In</button>
+                <p class="toggle-link" onclick="toggleForm()">Don't have an account? Register</p>
+            </div>
+            <div id="registerForm" style="display: none;">
+                <h3>Register</h3>
+                <input type="text" id="registerUsername" placeholder="Username" required>
+                <input type="email" id="registerEmail" placeholder="Email" required>
+                <input type="password" id="registerPassword" placeholder="Password" required>
+                <button onclick="register()">Register</button>
+                <p class="toggle-link" onclick="toggleForm()">Already have an account? Log In</p>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>© 2024 Swara Box | <a href="privacy-policy.html">Privacy Policy</a></p>
+    </footer>
+    <script>
+        function toggleForm() {
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            loginForm.style.display = loginForm.style.display === 'none' ? 'block' : 'none';
+            registerForm.style.display = registerForm.style.display === 'none' ? 'block' : 'none';
+        }
+
+        async function login() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await response.json();
+                if (data.userId) {
+                    localStorage.setItem('userId', data.userId);
+                    window.location.href = 'contentfile.html';
+                } else {
+                    alert(data.error || 'Login failed');
+                }
+            } catch (error) {
+                alert('Error logging in');
+            }
+        }
+
+        async function register() {
+            const username = document.getElementById('registerUsername').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            try {
+                const response = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, email, password })
+                });
+                const data = await response.json();
+                if (response.status === 201) {
+                    alert('Registration successful! Please log in.');
+                    toggleForm();
+                } else {
+                    alert(data.error || 'Registration failed');
+                }
+            } catch (error) {
+                alert('Error registering');
+            }
+        }
+    </script>

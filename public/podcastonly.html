@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swara Box - Podcasts</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li class="brand"><img src="swara box.jpg" alt="Swara Box Logo"> Swara Box</li>
+            <li><a href="intro.html">Home</a></li>
+            <li><a href="contentfile.html">All Content</a></li>
+            <li><a href="musiconly.html">Music</a></li>
+            <li><a href="privacy-policy.html">About</a></li>
+            <li><a href="#" onclick="logout()">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="songList">
+            <h1>Podcasts</h1>
+            <div class="upload-container">
+                <h3>Upload Podcast</h3>
+                <input type="text" id="songTitle" placeholder="Title" required>
+                <input type="text" id="songArtist" placeholder="Artist" required>
+                <input type="file" id="songFile" accept=".mp3" required>
+                <button onclick="uploadSong()">Upload</button>
+            </div>
+            <div class="searchBar">
+                <input type="text" id="searchInput" placeholder="Search podcasts...">
+            </div>
+            <div class="recommendation">
+                <h2>Your Recommendation</h2>
+                <button id="recommendButton">Get Another Recommendation</button>
+                <div id="recommendation"></div>
+            </div>
+            <div class="songItemContainer" id="songListContainer"></div>
+        </div>
+    </div>
+    <div class="bottom">
+        <input type="range" id="myProgressBar" min="0" value="0" max="100">
+        <div class="songInfo">
+            <img src="playing.gif" id="gif" style="opacity: 0; width: 40px;">
+            <span id="masterSongName">Select a Podcast</span>
+            <div class="icons">
+                <i class="fas fa-step-backward" id="previous"></i>
+                <i class="far fa-play-circle" id="masterPlay"></i>
+                <i class="fas fa-step-forward" id="next"></i>
+            </div>
+            <input type="range" id="volumeControl" min="0" max="100" value="50">
+        </div>
+    </div>
+    <script src="podcastonly.js"></script>
+</body>
+</html>
